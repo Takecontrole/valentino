@@ -1,6 +1,6 @@
 import react from "react";
 import styled from "styled-components";
-
+import { Link } from "react-router-dom"
 const Container = styled.div`
   background-color: white;
   text-align: center;
@@ -21,23 +21,49 @@ const Brands = () => {
     <Brand> 
      <h5>Наши бренды</h5>
     </Brand>
-    <Brand> 
+   
+        
+        
+               
+          <Link to="/products/brands/Contra la contra"  style={{color:"black",textDecoration: 'none' }}>
+              <Brand> 
      <h1>Contra la Contra</h1>
     </Brand>
-    <Brand> 
+ </Link>
+        
+      
+        
+          <Link style={{color:"black",textDecoration: 'none' }} to="/products/brands/Beastie girls" >
+          <Brand> 
      <p className="Beastie">Beastie Girls</p>
       </Brand>
-      <Brand> 
+          </Link>
+      
+        
+            
+              <Link to="/products/brands/Bad brains"  style={{color:"black",textDecoration: 'none' }}>
+            <Brand> 
      <p className="brains">Bad Brains</p>
       </Brand>
-      
-      <Brand> 
-     <p className="cross">CROSS</p>
-      </Brand>
-
-      <Brand> 
+          </Link>
+     
+       
+          <Link to="/products/brands/Acrostix"  style={{color:"black",textDecoration: 'none' }}>
+                <Brand> 
      <p >AcrostiX</p>
       </Brand>
+          </Link>
+        
+        
+        
+        <Link to="/products/brands/CROSS"  style={{color:"black",textDecoration: 'none' }}>
+             <Brand> 
+     <p className="cross">CROSS</p>
+      </Brand>
+</Link>
+       
+   
+     
         </Container>
     
   )

@@ -1,124 +1,59 @@
 import React, { useEffect, useState } from "react";
-import { Badge, Button, Modal, Table } from "react-bootstrap";
-import { useSelector } from "react-redux";
 import axios from "../../axios";
-import Loading from "../../components/Loading";
-import Pagination from "../../components/Pagination";
+import "./widgetLg.css";
+import {format} from "timeago.js"
+import { Badge, Button, Modal, Table } from "react-bootstrap";
+export default function WidgetLg() {
+  const [orders, setOrders] = useState([]);
 
-function OrdersList() {
-    const [orders, setOrders] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const products = useSelector((state) => state.products);
-    const [orderToShow, setOrderToShow] = useState([]);
-    const [show, setShow] = useState(false);
-
-    const handleClose = () => setShow(false);
-
-    function markShipped(orderId, ownerId) {
+function markShipped(orderId, ownerId) {
         axios
             .patch(`/orders/${orderId}/mark-shipped`, { ownerId })
             .then(({ data }) => setOrders(data))
             .catch((e) => console.log(e));
     }
-
-    function showOrder(productsObj) {
-        let productsToShow = products.filter((product) => productsObj[product._id]);
-        productsToShow = productsToShow.map((product) => {
-            const productCopy = { ...product };
-            productCopy.count = productsObj[product._id];
-            delete productCopy.description;
-            return productCopy;
-        });
-        console.log(productsToShow);
-        setShow(true);
-        setOrderToShow(productsToShow);
-    }
-
-    useEffect(() => {
-        setLoading(true);
-        axios
-            .get("/orders")
-            .then(({ data }) => {
-                setLoading(false);
-                setOrders(data);
-            })
-            .catch((e) => {
-                setLoading(false);
-            });
-    }, []);
-
-    if (loading) {
-        return <Loading />;
-    }
-
-    if (orders.length === 0) {
-        return <h1 className="text-center pt-4">Сейчас нет заказов</h1>;
-    }
-
-    function TableRow({ _id, count, owner, total, status, products, address }) {
-        return (
-            <tr>
-                <td>{_id}</td>
-                <td>{owner?.name}</td>
-                <td>{count}</td>
-                <td>{total}</td>
-                <td>{address}</td>
-                <td>
-                    {status === "processing" ? (
-                        <Button size="sm" onClick={() => markShipped(_id, owner?._id)}>
-                            Отметить как доставленно
+    
+  useEffect(() => {
+    const getOrders = async () => {
+      try {
+        const res = await axios.get("/orders");
+        setOrders(res.data);
+      } catch {}
+    };
+    getOrders();
+  }, []);
+  
+  return (
+    <div className="widgetLg">
+      <h3 className="widgetLgTitle">Последние транзакции</h3>
+      <table className="widgetLgTable">
+        <tr className="widgetLgTr">
+          <th className="widgetLgTh">Пользователь</th>
+          <th className="widgetLgTh">Дата</th>
+          <th className="widgetLgTh">Сумма</th>
+          <th className="widgetLgTh">Статус</th>
+        </tr>
+        {orders.map((order) => (
+          <tr className="widgetLgTr" key={order._id}>
+            <td className="widgetLgDate">
+              {order.owner.name}
+            </td>
+            <td className="widgetLgDate">{format(order.date)}</td>
+            <td className="widgetLgAmount">₽{order.total}</td>
+            <td className="widgetLgAmount">{order.address}</td>
+          
+            <td>
+                    {order.status === "processing" ? (
+                        <Button style={{ fontSize:"12px", width:"120px", height:"30px"}} onClick={() => markShipped(order._id, order.owner?._id)}>
+                            В процессе
                         </Button>
                     ) : (
-                        <Badge bg="success">Доставлено</Badge>
+                        <Badge   bg="success">Доставлено</Badge>
                     )}
                 </td>
-                <td>
-                    <span style={{ cursor: "pointer" }} onClick={() => showOrder(products)}>
-                        Посмотреть заказ <i className="fa fa-eye"></i>
-                    </span>
-                </td>
-            </tr>
-        );
-    }
-
-    return (
-        <>
-            <Table responsive striped bordered hover>
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Имя клиента</th>
-                        <th>Данные</th>
-                        <th>Итог</th>
-                        <th>Адресс</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <Pagination data={orders} RenderComponent={TableRow} pageLimit={1} dataLimit={10} tablePagination={true} />
-                </tbody>
-            </Table>
-
-            <Modal show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Детали</Modal.Title>
-                </Modal.Header>
-                {orderToShow.map((order) => (
-                    <div className="order-details__container d-flex justify-content-around py-2">
-                        <img src={order.pictures[0].url} style={{ maxWidth: 100, height: 100, objectFit: "cover" }} />
-                        <p>
-                            <span>{order.count} x </span> {order.name}
-                        </p>
-                        <p>Цена{Number(order.price) * order.count}</p>
-                    </div>
-                ))}
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                        Закрыть
-                    </Button>
-                </Modal.Footer>
-            </Modal>
-        </>
+          </tr>
+        ))}
+      </table>
+    </div>
     );
 }
-
-export default OrdersList;

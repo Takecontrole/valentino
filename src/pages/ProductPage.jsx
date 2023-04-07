@@ -125,8 +125,7 @@ display: relative;
 `;
 
 const Button = styled.button`
-width: 90%;
-margin-left: 15px;
+width: 100%;
 color: #C9ADA7;
 border: 2px solid #fcf5f5;
   padding: 15px;
@@ -362,14 +361,29 @@ if (bgcolor == "серебро") {
             </Filter>
           </FilterContainer>
           
-                    {user && !user.isAdmin && (
+                   
+                     
+                            {user ? 
+                    <div></div>
+                         : 
+                                
                         <ButtonGroup style={{ width: "90%" }}>
-                           
+                           <LinkContainer to="/login">
+                           <Button className="addButton">
+                                Добавить в корзину
+                            </Button> 
+                              </LinkContainer>
+                        </ButtonGroup>
+                         
+                            }   
+                         
+                            {user && !user.isAdmin && (
+                        <ButtonGroup style={{ width: "90%" }}>
                            <Button className="addButton" onClick={handleClick}>
                                 Добавить в корзину
                             </Button> 
                         </ButtonGroup>
-                    )}
+                         )}
                     {user && user.isAdmin && (
                         <LinkContainer to={`/product/${product._id}/edit`}>
                             <Button className="addButton">Редактировать</Button>

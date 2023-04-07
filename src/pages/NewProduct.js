@@ -13,21 +13,33 @@ import { useSelector } from "react-redux";
 import { useMemo } from "react";
 import { productData } from "../dummyData";
 const Form = styled.form`
+background-color: #0c101b;
   width: 100%;
+  height: 100%;
+  color: #e0e0e0;
+  top: -150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;
 const Input = styled.input`
   flex: 1;
   width: 80%;
   margin: 20px 10px 0px 0px;
   padding: 10px;
-  border: 2px solid #C9ADA7;
+  border: none;
+  border-bottom: 1px solid #e0e0e0;
+  background-color: #1F2A40;
+  color: #e0e0e0;
 `;
 const Select = styled.select`
 margin: 20px 10px 0px 0px;
   padding: 10px;
 background:white;
 width:80%;
-border: 2px solid #C9ADA7;
+  background-color: #1F2A40;
+  color: #e0e0e0;
   
 `;
 const Button = styled.button`
@@ -38,6 +50,7 @@ const Button = styled.button`
   background-color: teal;
   color: white;
   cursor: pointer;
+  
 `;
 const Option = styled.option``;
 function NewProduct() {
@@ -53,44 +66,7 @@ function NewProduct() {
     const [imgToRemove, setImgToRemove] = useState(null);
     const navigate = useNavigate();
     const [createProduct, { isError, error, isLoading, isSuccess }] = useCreateProductMutation();
-const [pStats, setPStats] = useState([]);
-  const [userStats, setUserStats] = useState([]);
-const MONTHS = useMemo(
-    () => [
-           "Янв",
-      "Фев",
-      "Мар",
-      "Апр",
-      "Май",
-      "Июн",
-      "Июл",
-      "Авг",
-      "Сен",
-      "Окт",
-      "Ноя",
-      "Дек",
-    ],
-    []
-  );
-useEffect(() => {
-    const getStats = async () => {
-      try {
-        const res = await axios.get(`orders/income?pid=${id}` );
-        const list = res.data.sort((a,b)=>{
-            return a._id - b._id
-        })
-        list.map((item) =>
-          setPStats((prev) => [
-            ...prev,
-            { name: MONTHS[item._id - 1], Sales: item.total },
-          ])
-        );
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    getStats();
-  }, [id, MONTHS]);
+
     function handleRemoveImg(imgObj) {
         setImgToRemove(imgObj.public_id);
         axios
@@ -137,10 +113,7 @@ useEffect(() => {
                         <h1 className="mt-4">Создавайте</h1>
                         {isSuccess && <Alert variant="success">Успешно</Alert>}
                         {isError && <Alert variant="danger">{error.data}</Alert>}
-       <div className="productTopLeft">
-          <Chart data={pStats} dataKey="Sales" title="Эффективность продаж" />
-            <Chart data={productData} dataKey="Sales" title="Пример" />
-        </div>                    
+              
                         
                         <Input
           type="text" placeholder="введите имя" value={name} required onChange={(e) => setName(e.target.value)}

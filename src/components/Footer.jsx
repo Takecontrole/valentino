@@ -141,7 +141,7 @@ const Footer = () => {
         </ContactItem>
       </Right>
       <PaymentOptionsMobile>
-        <Payment src="/img/payment.png" />
+        <Payment src="./payment.png" />
     </PaymentOptionsMobile>
     </Container>
   );

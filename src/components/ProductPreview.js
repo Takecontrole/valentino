@@ -1,8 +1,7 @@
-
 import React from "react";
 import { Badge, Card } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-
+import { useAddToCartMutation } from "../services/appApi";
 import {
   FavoriteBorderOutlined,
   SearchOutlined,
@@ -10,7 +9,7 @@ import {
 } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-
+import { useSelector } from "react-redux";
 const Info = styled.div`
   opacity: 0;
   width: 100%;
@@ -99,9 +98,12 @@ const Icon = styled.div`
   }
 `;
 function ProductPreview({ _id, category, name, color, price, brend, size, pictures }) {
-  
+  const user = useSelector((state) => state.user);
+  const [addToCart, { isSuccess }] = useAddToCartMutation();
     
-  
+  const handleClick = () => { addToCart({ userId: user._id, productId: _id, price: price, color: color, 
+                          size: size,
+                          image: pictures[0].url })}
 
   
     return (
@@ -111,7 +113,7 @@ function ProductPreview({ _id, category, name, color, price, brend, size, pictur
      
        
       <Info>
-        <Icon>
+        <Icon onClick={handleClick}>
           <ShoppingCartOutlined />
         </Icon>
         <Icon>

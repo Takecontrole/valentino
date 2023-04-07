@@ -11,7 +11,7 @@
           height: 3px;
           background-color: #15023a;
           transform-origin: left;
-          transition: all 2s ease;
+          transition: all 1s ease;
         }
        
    .active-line1 {
@@ -209,12 +209,10 @@ box-shadow: 0 0 6px #ccc;
 }
 
 .modalContainer {
-  
   width: 65%;
   position: fixed;
   bottom: 300px;
   right: 0;
-  
   display: flex;
   background-color: #15023a;
   border: 1px solid black;

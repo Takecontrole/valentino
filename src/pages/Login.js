@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useLoginMutation } from "../services/appApi";
 import { useNavigate } from "react-router-dom";
 import { mobile } from "../responsive";
-
+import { LinkContainer } from "react-router-bootstrap";
 const Container = styled.div`
   height:100vh;
   background-size: cover;
@@ -93,6 +93,9 @@ function Login() {
          > Войти
         </Button>
        </Form>
+          <LinkContainer style={{marginTop:"10px", textDecoration: "underline"}} to="/signup">
+       <p >Зарегистрироваться</p>
+         </LinkContainer>
       </Wrapper>
     </Container>
   );

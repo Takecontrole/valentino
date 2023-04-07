@@ -229,16 +229,20 @@ const handleDragStart = (e) => e.preventDefault();
      
 
         
-                                                    { openModal ?     
+                                                       
+                                                    { openModal ? 
         <div className="modalContainer" open={openModal} onClose={() => setOpenModal(false)}  >
+      
       <Modal 
       open={openModal} 
       onClose={() => setOpenModal(false)} />
-        </div>   
+        
+        </div>  
                         :     
                             <div className="stickymassage">
   <button onClick={() => setOpenModal(true)}  >получи награду</button>
         </div>  }
+        
         
         {menuOpen ?
 

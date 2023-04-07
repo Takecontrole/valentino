@@ -16,6 +16,11 @@ background-color: #0c101b;
   width: 100%;
   height: 100%;
   color: #e0e0e0;
+  top:-150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;
 const Input = styled.input`
   flex: 1;
@@ -43,6 +48,7 @@ const Button = styled.button`
   background-color: teal;
   color: white;
   cursor: pointer;
+  
 `;
 const Option = styled.option``;
 function EditProductPage() {

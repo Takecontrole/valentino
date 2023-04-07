@@ -32,7 +32,7 @@ function App() {
     const dispatch = useDispatch();
     
     useEffect(() => {
-        const socket = io("ws://localhost:8080/");
+        const socket = io("ws://api-clothing.adaptable.app/");
         socket.off("notification").on("notification", (msgObj, user_id) => {
             // logic for notification
             if (user_id === user._id) {
@@ -64,36 +64,29 @@ function App() {
                     
                      {user && user.isAdmin && (
                         <>
-                            <Route path="/admin" element={<AdminDashboard />} />
-                           
-                            <Route path="/product/:id/edit" element={<EditProductPage />} />
-                    <Route path="/new-product" element={<NewProduct />} />
-             <Route path="/users"
-          element={<UserList />} />
-         
-          <Route path="/view-orders" element={
-            <OrdersList />}/>
-          
-          <Route path="/view-products" 
-           element={ <ViewProductList />}/>
-          
-          
-         
+
                         </>
                     )}
+                    
+                    
                     {user && (
                         <>
                             <Route path="/cart" element={<CartPage />} />
                              <Route path="/orders" element={<OrdersPage />} />
                         </>
                     )}
+                    
                     <Route path="/brandsDescription" element={<BrandsDescription />} />
                     <Route path="/product/:id" element={<ProductPage />} />
                    <Route path="/products/:category"
                    element={<ProductList />}/>
                    <Route path="/products/brands/:brend"
                    element={<ProductListBrands />}/>
-                 
+                        <Route path="/product/:id/edit" element={<EditProductPage />} />
+                    <Route path="/new-product" element={<NewProduct />} />
+                      <Route path="/view-orders" element={
+            <OrdersList />}/>
+            
                  
                  
 

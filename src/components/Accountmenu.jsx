@@ -64,7 +64,7 @@ const user = useSelector((state) => state.user);
                                     {user.isAdmin && (
                                         <>
                                           <li>
-                                            <a style={{textDecoration:"none", color:"white"}} href="https://takecontrole.github.io/AdminDashboard/" target="_blank">
+                                            <a style={{textDecoration:"none", color:"white"}} href="https://takecontrole.github.io/valentino-admin/" target="_blank">
                                               Панель управления
                                             </a >
                                             </li>
