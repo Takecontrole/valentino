@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/valentino/static/css/main.4c945a0f.css",
-    "main.js": "/valentino/static/js/main.8a2059aa.js",
+    "main.css": "/valentino/static/css/main.64ac2941.css",
+    "main.js": "/valentino/static/js/main.e90ec650.js",
     "static/js/787.44517ab3.chunk.js": "/valentino/static/js/787.44517ab3.chunk.js",
     "static/media/brends.mp4": "/valentino/static/media/brends.423ae03fd37e5f0baf49.mp4",
     "static/media/background.jpg": "/valentino/static/media/background.d8a749a58211b7ad438d.jpg",
@@ -16,12 +16,12 @@
     "static/media/Raleway-MediumItalic.ttf": "/valentino/static/media/Raleway-MediumItalic.74d4db62e93d0f988ea3.ttf",
     "static/media/signature.png": "/valentino/static/media/signature.c6f63caa128d72e7db09.png",
     "index.html": "/valentino/index.html",
-    "main.4c945a0f.css.map": "/valentino/static/css/main.4c945a0f.css.map",
-    "main.8a2059aa.js.map": "/valentino/static/js/main.8a2059aa.js.map",
+    "main.64ac2941.css.map": "/valentino/static/css/main.64ac2941.css.map",
+    "main.e90ec650.js.map": "/valentino/static/js/main.e90ec650.js.map",
     "787.44517ab3.chunk.js.map": "/valentino/static/js/787.44517ab3.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.4c945a0f.css",
-    "static/js/main.8a2059aa.js"
+    "static/css/main.64ac2941.css",
+    "static/js/main.e90ec650.js"
   ]
 }
